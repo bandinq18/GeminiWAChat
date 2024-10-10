@@ -1,26 +1,26 @@
-## 📖 Visão Geral
+## 📖 Ikhtisar
 
-Este projeto integra o Google Generative AI (GeminiService) com o Venom Bot (WhatsAppService) para criar um chatbot para o WhatsApp. O bot utiliza a inteligência artificial generativa do Google para processar e responder às mensagens.
+Proyek ini mengintegrasikan Google Generative AI (GeminiService) dengan Venom Bot (WhatsAppService) untuk membuat chatbot untuk WhatsApp. Bot ini menggunakan kecerdasan buatan generatif Google untuk memproses dan merespons pesan.
 
-## 🛠️ Configuração
+## 🛠️ Konfigurasi
 
-1. **Variáveis de Ambiente**:
-    - Certifique-se de ter um arquivo `.env` com sua `GEMINI_API_KEY`.
+1. **Variabel Lingkungan**:
+- Pastikan Anda memiliki file `.env` dengan file `GEMINI_API_KEY`.
       ```
       GEMINI_API_KEY=sua_chave_de_api_do_google_generative_ai
       ```
 
-2. **Dependências**:
-    - Instale os pacotes necessários usando npm:
+2. **Ketergantungan**:
+- Instal paket-paket yang diperlukan dengan menggunakan npm:
       ```sh
       npm install dotenv @google/generative-ai venom-bot
       ```
 
 ## 🤖 GeminiService
 
-A classe `GeminiService` é responsável por se comunicar com a API do Google Generative AI para gerar respostas baseadas em texto.
+Kelas `GeminiService` bertanggung jawab untuk berkomunikasi dengan Google Generative AI API untuk menghasilkan respons berbasis teks.
 
-### Código da Classe
+###Kode Kelas
 
 ```javascript
 require('dotenv').config();
@@ -79,17 +79,17 @@ class GeminiService {
 module.exports = GeminiService;
 ```
 
-### 🔍 Explicação Detalhada
+## 🔍 Penjelasan Rinci
 
-#### 1. Carregar Variáveis de Ambiente 🌿
+#### 1. Memuat Variabel Lingkungan 🌿
 
 ```javascript
 require('dotenv').config();
 ```
 
-- Carrega as variáveis de ambiente do arquivo `.env`.
+- Muat variabel lingkungan dari file `.env`.
 
-#### 2. Importar Módulos 📦
+#### 2. Mengimpor Modul 📦
 
 ```javascript
 const {
@@ -99,9 +99,9 @@ const {
 } = require("@google/generative-ai");
 ```
 
-- Importa as classes e enumerações necessárias do pacote `@google/generative-ai`.
+- Impor kelas dan enumerasi yang diperlukan dari paket `@google/generative-ai`.
 
-#### 3. Definir a Classe `GeminiService` 🛠️
+#### 3. Mendefinisikan Kelas `GeminiService` 🛠️
 
 ```javascript
 class GeminiService {
@@ -110,7 +110,7 @@ class GeminiService {
         this.genAI = new GoogleGenerativeAI(apiKey);
         this.modelConfig = {
             model: "gemini-1.5-pro-latest",
-            systemInstruction: "", //Prompt incial ex: "Você é um modelo que responde as perguntas sobre a minha livraria"
+            systemInstruction: "", // Contoh pertanyaan awal: "Anda adalah seorang model yang menjawab pertanyaan tentang toko buku saya"
         };
         this.generationConfig = {
             temperature: 1,
@@ -152,11 +152,10 @@ class GeminiService {
 
 ##### **`constructor()`** 🏗️
 
-- **`apiKey`**: Obtém a chave da API do arquivo `.env`.
-- **`this.genAI`**: Inicializa a instância do Google Generative AI com a chave da API.
-- **`this.modelConfig`**: Configura o modelo de AI e as instruções do sistema para gerar respostas com o tom desejado.
-- **`this.generationConfig`**: Configurações de geração, como temperatura, topP, topK e outros parâmetros de ajuste fino para a saída de texto.
-- **`this.safetySettings`**: Configurações de segurança para definir como a IA deve lidar com conteúdos prejudiciais.
+- **`apiKey`**: Mendapat kunci API dari berkas `.env`.- **`this.genAI`**: Menginisialisasi instans Google Generative AI dengan kunci API.
+- **`this.modelConfig`**: Mengonfigurasi model AI dan instruksi sistem untuk menghasilkan respons dengan nada yang diinginkan.
+- ** ` this.generationConfig ` **: Pengaturan pembangkitan seperti temperatur, topP, topK, dan parameter penyetelan lainnya untuk output teks.
+- **`this.safetySettings`**: Setelan keamanan untuk menentukan cara AI menangani konten berbahaya.
 
 ##### **`async startChat()`** 🚀
 
@@ -170,7 +169,7 @@ async startChat() {
 }
 ```
 
-- Inicializa uma nova sessão de chat com a configuração especificada.
+- Menginisialisasi sesi obrolan baru dengan konfigurasi yang ditentukan.
 
 ##### **`async sendMessage(message)`** ✉️
 
@@ -189,13 +188,13 @@ async sendMessage(message) {
 }
 ```
 
-- Envia uma mensagem para a sessão de chat e retorna a resposta gerada.
+- Mengirim pesan ke sesi obrolan dan mengembalikan respons yang dihasilkan.
 
 ## 📱 WhatsAppService
 
-A classe `WhatsAppService` gerencia a interação com o Venom Bot para enviar e receber mensagens no WhatsApp.
+Kelas `WhatsAppService` mengelola interaksi dengan Bot Venom untuk mengirim dan menerima pesan di WhatsApp.
 
-### Código da Classe
+### Kode Kelas
 
 ```javascript
 const venom = require('venom-bot');
@@ -204,7 +203,7 @@ class WhatsAppService {
     constructor(sessionName, messageHandler) {
         this.sessionName = sessionName;
         this.client = null;
-        this.messageHandler = messageHandler;  // Handler para processar as mensagens recebidas
+        this.messageHandler = messageHandler;  // Handler untuk memproses pesan masuk
     }
 
     async initialize() {
@@ -220,9 +219,9 @@ class WhatsAppService {
 
     listenToMessages() {
         this.client.onMessage(async (message) => {
-            if (!message.isGroupMsg) {  // Ignorando mensagens de grupo, se necessário
+            if (!message.isGroupMsg) {  // Mengabaikan pesan grup, jika perlu
                 try {
-                    const reply = await this.messageHandler(message.body);  // Usando o handler externo para obter a resposta
+                    const reply = await this.messageHandler(message.body);  // Menggunakan handler eksternal untuk mendapatkan jawabannya
                     this.client.sendText(message.from, reply)
                         .then((result) => {
                             console.log('Mensagem enviada: ', result);
@@ -239,9 +238,9 @@ class WhatsAppService {
     }
     listenSingleContatcMenssage() {
         this.client.onMessage(async (message) => {
-            if (!message.isGroupMsg && message.from === '55xxxxxxxxxxx@c.us') { // Checando se o remetente é o contato desejado // Coloque o número e o dd 
+            if (!message.isGroupMsg && message.from === '55xxxxxxxxxxx@c.us') { // Memeriksa apakah pengirim adalah kontak yang diinginkan // Masukkan nomor dan dd
                 try {
-                    const reply = await this.messageHandler(message.body);  // Usando o handler externo para obter a resposta
+                    const reply = await this.messageHandler(message.body); // Menggunakan handler eksternal untuk mendapatkan jawabannya
                     this.client.sendText(message.from, reply)
                         .then((result) => {
                             console.log('Mensagem enviada: ', result);
@@ -260,23 +259,23 @@ class WhatsAppService {
 module.exports = WhatsAppService;
 ```
 
-### 🔍 Explicação Detalhada
+### 🔍 Penjelasan Rinci
 
-#### Constructor 🏗️
+#### Konstruktor 🏗️
 
 ```javascript
 constructor(sessionName, messageHandler) {
     this.sessionName = sessionName;
     this.client = null;
-    this.messageHandler = messageHandler;  // Handler para processar as mensagens recebidas
+    this.messageHandler = messageHandler;  // Handler untuk memproses pesan masuk
 }
 ```
 
-- **`sessionName`**: Nome da sessão do Venom Bot.
+- **`sessionName`**: Nama sesi Venom Bot.
 
-- **`messageHandler`**: Função para processar as mensagens recebidas.
+- ** ` pengelolaPesan ` **: Fungsi untuk memproses pesan yang masuk.
 
-#### Inicializar o Cliente 🚀
+#### Menginisialisasi Klien 🚀
 
 ```javascript
 async initialize() {
@@ -291,16 +290,16 @@ async initialize() {
 }
 ```
 
-- Inicializa o cliente do Venom Bot e começa a escutar mensagens de um contato específico.
+- Menginisialisasi klien Venom Bot dan mulai mendengarkan pesan dari kontak tertentu.
 
-#### Escutar Mensagens de Contatos Específicos 👂
+#### Mendengarkan Pesan dari Kontak Tertentu 👂
 
 ```javascript
 listenSingleContatcMenssage() {
     this.client.onMessage(async (message) => {
-        if (!message.isGroupMsg && message.from === '55xxxxxxxxxxx@c.us') { // Checando se o remetente é o contato desejado // Coloque o número e o dd 
+        if (!message.isGroupMsg && message.from === '62xxxxxxxxxxx@c.us') { // Memeriksa apakah pengirim adalah kontak yang diinginkan // Masukkan nomor dan dd
             try {
-                const reply = await this.messageHandler(message.body);  // Usando o handler externo para obter a resposta
+                const reply = await this.messageHandler(message.body);  // Menggunakan handler eksternal untuk mendapatkan jawabannya
                 this.client.sendText(message.from, reply)
                     .then((result) => {
                         console.log('Mensagem enviada: ', result);
@@ -316,13 +315,13 @@ listenSingleContatcMenssage() {
 }
 ```
 
-- Escuta mensagens de um contato específico e processa a resposta usando o `messageHandler`.
+- Mendengarkan pesan dari kontak tertentu dan memproses respons menggunakan `pengelola pesan`.
 
-## 🌐 Integração
+## 🌐 Integrasi
 
-Integra `GeminiService` e `WhatsAppService` para processar e responder às mensagens recebidas.
+Mengintegrasikan `GeminiService` dan `WhatsAppService` untuk memproses dan merespons pesan yang masuk.
 
-### Código de Integração
+## Kode Integrasi
 
 ```javascript
 const WhatsAppService = require('./src/WhatsAppService');
@@ -330,37 +329,37 @@ const GeminiService = require('./src/GeminiService');
 
 const geminiService = new GeminiService();
 
-// Esta função será usada para processar mensagens usando o GeminiService
+// Fungsi ini akan digunakan untuk memproses pesan menggunakan GeminiService
 async function handleMessage(message) {
     try {
-        return await geminiService.sendMessage(message); // Supondo que `sendMessage` retorna a resposta diretamente
+        return await geminiService.sendMessage(message); // Dengan asumsi `sendMessage` mengembalikan jawaban secara langsung
     } catch (error) {
         console.error('Error in handleMessage:', error);
         return 'Erro ao processar sua mensagem.';
     }
 }
 
-// Passando a função `handleMessage` para o WhatsAppService
+// Meneruskan fungsi `handleMessage` ke WhatsAppService
 const whatsappService = new WhatsAppService('gemini-session', handleMessage);
 whatsappService.initialize();
 ```
 
-### 🔍 Explicação Detalhada
+### 🔍 Penjelasan Rinci
 
-#### Inicialização dos Serviços 🚀
+#### Inisialisasi Layanan 🚀
 
 ```javascript
 const geminiService = new GeminiService();
 ```
 
-- Inicializa o serviço `GeminiService`.
+- Menginisialisasi layanan `GeminiService`.
 
-#### Função `handleMessage` 📨
+#### Fungsi `handleMessage` 📨
 
 ```javascript
 async function handleMessage(message) {
     try {
-        return await geminiService.sendMessage(message); // Supondo que `sendMessage` retorna a resposta diretamente
+        return await geminiService.sendMessage(message); // Dengan asumsi `sendMessage` mengembalikan jawaban secara langsung
     } catch (error) {
         console.error('Error in handleMessage:', error);
         return 'Erro ao processar sua mensagem.';
@@ -368,24 +367,24 @@ async function handleMessage(message) {
 }
 ```
 
-- Define uma função para processar mensagens recebidas usando o `GeminiService`.
+- Mendefinisikan fungsi untuk memproses pesan masuk menggunakan `GeminiService`.
 
-#### Inicialização do `WhatsAppService` 📱
+#### Inisialisasi `WhatsAppService` 📱
 
 ```javascript
 const whatsappService = new WhatsAppService('gemini-session', handleMessage);
 whatsappService.initialize();
 ```
 
-- Inicializa o `WhatsAppService` e começa a escutar mensagens, processando-as com a função `handleMessage`.
+- Menginisialisasi `WhatsAppService` dan mulai mendengarkan pesan, memprosesnya dengan fungsi `handleMessage`.
 
-### 🏃‍♂️ Executando o Projeto
+## 🏃‍♂️ Menjalankan Proyek
 
-1. **Inicie o WhatsAppService**:
-    - Inicie o serviço do Venom Bot com a função `handleMessage` para processar as mensagens recebidas.
+1. **Start WhatsAppService**:
+- Memulai layanan Venom Bot dengan fungsi `handleMessage` untuk memproses pesan yang masuk.
       ```sh
       node IntegrationController.js
       ```
 
-2. **Interaja com o bot**:
-    - Envie mensagens para o bot no WhatsApp e ele responderá utilizando o Google Generative AI conforme configurado.
+2. **Berinteraksi dengan bot**:
+- Kirim pesan ke bot di WhatsApp dan bot akan membalas menggunakan Google Generative AI yang telah dikonfigurasi.
