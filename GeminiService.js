@@ -45,7 +45,7 @@ class GeminiService {
             const result = await this.chatSession.sendMessage(message);
             return result.response.text();
         } catch (error) {
-            console.error("Problema ao enviar a mensagem:", error);
+            console.error("Masalah saat mengirim pesan:", error);
             throw error;
         }
     }
