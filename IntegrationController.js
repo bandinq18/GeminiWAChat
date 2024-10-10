@@ -3,7 +3,7 @@ const GeminiService = require('./src/GeminiService');
 
 const geminiService = new GeminiService();
 
-// Esta função será usada para processar mensagens usando o GeminiService
+// Fungsi ini akan digunakan untuk memproses pesan menggunakan GeminiService
 async function handleMessage(message) {
     try {
         return await geminiService.sendMessage(message); // Supondo que `sendMessage` retorna a resposta diretamente
