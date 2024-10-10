@@ -14,7 +14,7 @@ class WhatsAppService {
             });
             this.listenSingleContatcMenssage();
         } catch (error) {
-            console.error('Kesalahan saat memulai klien: ', error);
+            console.error('Kesalahan saat memulai klien venom: ', error);
         }
     }
 
@@ -31,26 +31,26 @@ class WhatsAppService {
                             console.error('Kesalahan pengiriman pesan: ', error);
                         });
                 } catch (error) {
-                    console.error('Erro ao tratar a mensagem: ', error);
-                    await this.client.sendText(message.from, 'Desculpe, ocorreu um erro ao processar sua mensagem.');
+                    console.error('Kesalahan dalam menangani pesan: ', error);
+                    await this.client.sendText(message.from, 'Maaf, ada kesalahan dalam memproses pesan Anda.');
                 }
             }
         });
     }
     listenSingleContatcMenssage() {
         this.client.onMessage(async (message) => {
-            if (!message.isGroupMsg && message.from === '55xxxxxxxxxxx@c.us') { // Checando se o remetente é o contato desejado
+            if (!message.isGroupMsg && message.from === '62xxxxxxxxxxx@c.us') { // Memeriksa apakah pengirim adalah kontak yang diinginkan
                 try {
-                    const reply = await this.messageHandler(message.body);  // Usando o handler externo para obter a resposta
+                    const reply = await this.messageHandler(message.body);  // Menggunakan handler eksternal untuk mendapatkan jawabannya
                     this.client.sendText(message.from, reply)
                         .then((result) => {
-                            console.log('Mensagem enviada: ', result);
+                            console.log('Pesan terkirim: ', result);
                         })
                         .catch((error) => {
-                            console.error('Erro ao enviar a mensagem:', error);
+                            console.error('Kesalahan pengiriman pesan:', error);
                         });
                 } catch (error) {
-                    console.error('Erro ao tratar a mensagem: ', error);
+                    console.error('Kesalahan dalam menangani pesan: ', error);
                 }
             }
         });
