@@ -11,8 +11,8 @@ class GeminiService {
         const apiKey = process.env.GEMINI_API_KEY;
         this.genAI = new GoogleGenerativeAI(apiKey);
         this.modelConfig = {
-            model: "gemini-1.5-flash-latest",
-            systemInstruction: "Sempre responda as perguntas em português, e responda de forma geral mesmo sem o usuario especificar detalhes do assunto" //Contexto que deve ser adiconado para funcionamento especificos
+            model: "gemini-1.5-pro-latest",
+            systemInstruction: "Selalu jawab pertanyaan dalam bahasa Indonesia, dan jawablah secara umum meskipun pengguna tidak menyebutkan secara detail tentang topik tersebut." /Konteks yang harus ditambahkan untuk fungsi tertentu
         };
         this.generationConfig = {
             temperature: 1,
