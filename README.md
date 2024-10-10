@@ -70,7 +70,7 @@ class GeminiService {
             const result = await this.chatSession.sendMessage(message);
             return result.response.text();
         } catch (error) {
-            console.error("Problema ao enviar a mensagem:", error);
+            console.error("Masalah saat mengirim pesan:", error);
             throw error;
         }
     }
@@ -213,7 +213,7 @@ class WhatsAppService {
             });
             this.listenSingleContatcMenssage();
         } catch (error) {
-            console.error('Erro a iniciar o cliente venom: ', error);
+            console.error('Jangan sampai Anda menjadi korban venom klien: ', error);
         }
     }
 
@@ -224,32 +224,32 @@ class WhatsAppService {
                     const reply = await this.messageHandler(message.body);  // Menggunakan handler eksternal untuk mendapatkan jawabannya
                     this.client.sendText(message.from, reply)
                         .then((result) => {
-                            console.log('Mensagem enviada: ', result);
+                            console.log('Pesan terkirim: ', result);
                         })
                         .catch((error) => {
-                            console.error('Erro enviando a mensagem: ', error);
+                            console.error('Kesalahan pengiriman pesan: ', error);
                         });
                 } catch (error) {
-                    console.error('Erro ao tratar a mensagem: ', error);
-                    await this.client.sendText(message.from, 'Desculpe, ocorreu um erro ao processar sua mensagem.');
+                    console.error('Kesalahan dalam menangani pesan: ', error);
+                    await this.client.sendText(message.from, 'Maaf, terjadi kesalahan dalam memproses pesan Anda.');
                 }
             }
         });
     }
     listenSingleContatcMenssage() {
         this.client.onMessage(async (message) => {
-            if (!message.isGroupMsg && message.from === '55xxxxxxxxxxx@c.us') { // Memeriksa apakah pengirim adalah kontak yang diinginkan // Masukkan nomor dan dd
+            if (!message.isGroupMsg && message.from === '62xxxxxxxxxxx@c.us') { // Memeriksa apakah pengirim adalah kontak yang diinginkan // Masukkan nomor dan dd
                 try {
                     const reply = await this.messageHandler(message.body); // Menggunakan handler eksternal untuk mendapatkan jawabannya
                     this.client.sendText(message.from, reply)
                         .then((result) => {
-                            console.log('Mensagem enviada: ', result);
+                            console.log('Pesan terkirim: ', result);
                         })
                         .catch((error) => {
-                            console.error('Erro ao enviar a mensagem:', error);
+                            console.error('Kesalahan pengiriman pesan:', error);
                         });
                 } catch (error) {
-                    console.error('Erro ao tratar a mensagem: ', error);
+                    console.error('Kesalahan dalam menangani pesan: ', error);
                 }
             }
         });
@@ -285,7 +285,7 @@ async initialize() {
         });
         this.listenSingleContatcMenssage();
     } catch (error) {
-        console.error('Erro a iniciar o cliente venom: ', error);
+        console.error('Jangan sampai Anda menjadi korban venom klien: ', error);
     }
 }
 ```
@@ -302,20 +302,20 @@ listenSingleContatcMenssage() {
                 const reply = await this.messageHandler(message.body);  // Menggunakan handler eksternal untuk mendapatkan jawabannya
                 this.client.sendText(message.from, reply)
                     .then((result) => {
-                        console.log('Mensagem enviada: ', result);
+                        console.log('Pesan terkirim: ', result);
                     })
                     .catch((error) => {
-                        console.error('Erro ao enviar a mensagem:', error);
+                        console.error('Kesalahan pengiriman pesan:', error);
                     });
             } catch (error) {
-                console.error('Erro ao tratar a mensagem: ', error);
+                console.error('Kesalahan dalam menangani pesan: ', error);
             }
         }
     });
 }
 ```
 
-- Mendengarkan pesan dari kontak tertentu dan memproses respons menggunakan `pengelola pesan`.
+- Mendengarkan pesan dari kontak tertentu dan memproses respons menggunakan `messageHandler`.
 
 ## 🌐 Integrasi
 
@@ -334,8 +334,8 @@ async function handleMessage(message) {
     try {
         return await geminiService.sendMessage(message); // Dengan asumsi `sendMessage` mengembalikan jawaban secara langsung
     } catch (error) {
-        console.error('Error in handleMessage:', error);
-        return 'Erro ao processar sua mensagem.';
+        console.error('Kesalahan dalam menangani Pesan:', error);
+        return 'Kesalahan saat memproses pesan Anda.';
     }
 }
 
@@ -361,8 +361,8 @@ async function handleMessage(message) {
     try {
         return await geminiService.sendMessage(message); // Dengan asumsi `sendMessage` mengembalikan jawaban secara langsung
     } catch (error) {
-        console.error('Error in handleMessage:', error);
-        return 'Erro ao processar sua mensagem.';
+        console.error('Kesalahan dalam menangani Pesan:', error);
+        return 'Kesalahan saat memproses pesan Anda.';
     }
 }
 ```
