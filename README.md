@@ -5,13 +5,13 @@ Proyek ini mengintegrasikan Google Generative AI (GeminiService) dengan Venom Bo
 ## 🛠️ Konfigurasi
 
 1. **Variabel Lingkungan**:
-- Pastikan Anda memiliki file `.env` dengan file `GEMINI_API_KEY`.
+      - Pastikan Anda memiliki file `.env` dengan file `GEMINI_API_KEY`.
       ```
       GEMINI_API_KEY=KODE_API_KEY
       ```
 
 2. **Ketergantungan**:
-- Instal paket-paket yang diperlukan dengan menggunakan npm:
+      - Instal paket-paket yang diperlukan dengan menggunakan npm:
       ```sh
       npm install dotenv @google/generative-ai venom-bot
       ```
