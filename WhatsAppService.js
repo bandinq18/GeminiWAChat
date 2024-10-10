@@ -4,7 +4,7 @@ class WhatsAppService {
     constructor(sessionName, messageHandler) {
         this.sessionName = sessionName;
         this.client = null;
-        this.messageHandler = messageHandler;  // Handler para processar as mensagens recebidas
+        this.messageHandler = messageHandler; // Penangan untuk memproses pesan masuk
     }
 
     async initialize() {
@@ -14,21 +14,21 @@ class WhatsAppService {
             });
             this.listenSingleContatcMenssage();
         } catch (error) {
-            console.error('Erro a iniciar o cliente venom: ', error);
+            console.error('Kesalahan saat memulai klien: ', error);
         }
     }
 
     listenToMessages() {
         this.client.onMessage(async (message) => {
-            if (!message.isGroupMsg) {  // Ignorando mensagens de grupo, se necessário
+            if (!message.isGroupMsg) {  // Mengabaikan pesan grup, jika perlu
                 try {
-                    const reply = await this.messageHandler(message.body);  // Usando o handler externo para obter a resposta
+                    const reply = await this.messageHandler(message.body);  // Menggunakan penangan eksternal untuk mendapatkan jawabannya
                     this.client.sendText(message.from, reply)
                         .then((result) => {
-                            console.log('Mensagem enviada: ', result);
+                            console.log('Pesan terkirim: ', result);
                         })
                         .catch((error) => {
-                            console.error('Erro enviando a mensagem: ', error);
+                            console.error('Kesalahan pengiriman pesan: ', error);
                         });
                 } catch (error) {
                     console.error('Erro ao tratar a mensagem: ', error);
