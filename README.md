@@ -7,7 +7,7 @@ Proyek ini mengintegrasikan Google Generative AI (GeminiService) dengan Venom Bo
 1. **Variabel Lingkungan**:
       - Pastikan Anda memiliki file `.env` dengan file `GEMINI_API_KEY`.
       ```
-      GEMINI_API_KEY=KODE_API_KEY
+      GEMINI_API_KEY="KODE_API_KEY"
       ```
 
 2. **Ketergantungan**:
