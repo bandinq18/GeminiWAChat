@@ -12,7 +12,7 @@ class GeminiService {
         this.genAI = new GoogleGenerativeAI(apiKey);
         this.modelConfig = {
             model: "gemini-1.5-pro-latest",
-            systemInstruction: "Selalu jawab pertanyaan dalam bahasa Indonesia, dan jawablah secara umum meskipun pengguna tidak menyebutkan secara detail tentang topik tersebut." /Konteks yang harus ditambahkan untuk fungsi tertentu
+            systemInstruction: "Selalu jawab pertanyaan dalam bahasa Indonesia, dan jawablah secara umum meskipun pengguna tidak menyebutkan secara detail tentang topik tersebut." //Konteks yang harus ditambahkan untuk fungsi tertentu
         };
         this.generationConfig = {
             temperature: 1,
